@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/styles.css"/>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body class="h-screen bg-gray-100 dark:bg-zinc-900">
+    <div class="h-full flex justify-center items-center">
+        <div class="w-full max-w-md h-full bg-white dark:bg-zinc-800 rounded-lg shadow-md overflow-hidden flex flex-col">
+            <div class="bg-green-500 dark:bg-green-700 text-white p-4 flex gap-5 items-center justify-between">
+                <div class="text-right flex items-center gap-5">
+                    <img class="w-10 h-10 rounded-full" src="/static/icons/profile.jpg" alt="Rounded avatar">
+                    <h1 class="text-lg font-semibold">Chat grupal</h1>
+                </div>
+                <div class="flex justify-end">
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                        <span class="sr-only">Open dropdown</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2" aria-labelledby="dropdownButton">
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Ver contacto</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Archivos, enlaces y docs.</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Silenciar notificaciones</a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+            
+            <div id="contentMensajes" class="flex-1 p-4 space-y-2 overflow-y-auto">
+                
+                <!-- <div class="flex items-end justify-start">
+                    <div class="bg-zinc-200 dark:bg-zinc-700 rounded-lg px-4 py-2 max-w-xs lg:max-w-md">
+                        Hello! How are you?
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-end">
+                    <div class="bg-green-200 dark:bg-green-500 rounded-lg px-4 py-2 max-w-xs lg:max-w-md">
+                        I'm good, thanks! And you?
+                    </div>
+                </div>-->
+                
+
+            </div>
+
+            <div class="bg-zinc-300 dark:bg-zinc-600 p-3 flex items-center">
+                <input id="mensaje" type="text" placeholder="Type a message..." class="w-full p-2 bg-white dark:bg-zinc-700 dark:text-white rounded-full focus:outline-none focus:ring focus:ring-green-300">
+                <button id="enviar" class="ml-2 text-green-500 dark:text-green-300 rounded-full bg-green-400 hover:shadow-md hover:shadow-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-3" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M3 20v-6l8-2l-8-2V4l19 8z"/></svg>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script src="static/js/flowbite.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="static/js/interaccion_app.js" defer></script>
+
+</body>
+</html>
