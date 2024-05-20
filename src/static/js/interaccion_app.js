@@ -2,7 +2,16 @@ let nombreUsuario;
 var socket = io();
 
 $(document).ready(function() {
-    solicitarNombreUsuario();
+    $("#btnAbrirModal").click();
+
+    $("#userForm").submit(function(event) {
+        event.preventDefault();
+        nombreUsuario = $("#name").val().trim();
+        if (nombreUsuario) {
+            $("#cerrarModal").click();
+            console.log("Nombre de usuario:", nombreUsuario);
+        }
+    });
 });
 
 $(() => {
@@ -13,34 +22,16 @@ $(() => {
         });
         $("#mensaje").val(""); 
     });
-    
     obtenerMensajes();
 });
 
+//presionar enter dentro del contenedor del mensaje.
 $("#mensaje").keypress(function(event) {
-    if (event.which === 13) { // Verificar si la tecla presionada es "Enter"
-        event.preventDefault(); // Evitar que se agregue un salto de línea en el campo de texto
-        $("#enviar").click(); // Simular un clic en el botón enviar
+    if (event.which === 13) {
+        event.preventDefault();
+        $("#enviar").click();
     }
 });
-
-function solicitarNombreUsuario() {
-    nombreUsuario = prompt("Por favor, ingresa tu nombre:");
-    if (nombreUsuario) {
-        mostrarChat();
-        console.log("Nombre de usuario:", nombreUsuario);
-    } else {
-        solicitarNombreUsuario(); // Vuelve a solicitar el nombre si no se proporcionó uno
-    }
-}
-
-function mostrarChat() {
-    $("#contentMensajes").show();
-    $("#mensaje").show();
-    $("#enviar").show();
-    obtenerMensajes();
-    $("#nombre").prop("disabled", true); // Desactiva la entrada de nombre una vez que se proporciona
-}
 
 function agregarMensajes(mensaje) {
     const messageElement = document.createElement('div');
@@ -49,7 +40,19 @@ function agregarMensajes(mensaje) {
     const bgDarkColor = mensaje.name === nombreUsuario ? 'green' : 'zinc';
 
     messageElement.className = `flex items-end justify-${justify}`;
-    messageElement.innerHTML = `<div class="bg-${bgColor}-200 dark:bg-${bgDarkColor}-700 rounded-lg px-4 py-2 max-w-xs lg:max-w-md">${mensaje.message}</div>`;
+    let userNameSpan = '';
+
+    if (mensaje.name !== nombreUsuario) {
+        userNameSpan = `<span class="block text-xs text-gray-500 dark:text-gray-400">${mensaje.name}</span>`;
+    }
+
+    // messageElement.innerHTML = `<div class="bg-${bgColor}-200 dark:bg-${bgDarkColor}-700 rounded-lg px-4 py-2 max-w-xs lg:max-w-md">${mensaje.message}</div>`;
+    messageElement.innerHTML = `
+        <div class="bg-${bgColor}-200 dark:bg-${bgDarkColor}-700 rounded-lg px-4 py-2 max-w-xs lg:max-w-md">
+            ${userNameSpan}
+            <div>${mensaje.message}</div>
+        </div>
+    `;
     $("#contentMensajes").append(messageElement);
 }
 
